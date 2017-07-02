@@ -1,0 +1,8 @@
+node_modules
+mydb-*
+_pouch_mydb-sqlite
+npm-debug.log
+.nuxt
+dist
+.DS_Store
+electronuxt-*
