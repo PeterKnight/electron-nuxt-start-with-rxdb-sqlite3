@@ -3,20 +3,10 @@
  */
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 
-/**
- * Install and activate Vue Dev Tools extension if in developer mode
- */
-if ( 'development' === process.env.NODE_ENV ) {
-    const { default: installExtension, VUEJS_DEVTOOLS } = require( 'electron-devtools-installer' );
-    installExtension( VUEJS_DEVTOOLS )
-        .then( ( name ) => console.log( `Added Extension:  ${name}` ) )
-        .catch( ( err ) => console.log( 'An error occurred: ', err ) );
-}
-
 let win = null // Current window
 
 const http = require( 'http' )
-const Nuxt = require( 'nuxt' )
+const { Nuxt, Builder } = require('nuxt')
 
 // Import and Set Nuxt.js options
 let config = require( './nuxt.config.js' )
@@ -29,7 +19,7 @@ const server = http.createServer( nuxt.render )
 
 // Build only in dev mode
 if ( config.dev ) {
-    nuxt.build()
+    new Builder(nuxt).build()
         .catch( ( error ) => {
             console.error( error ) // eslint-disable-line no-console
             process.exit( 1 )
@@ -81,6 +71,18 @@ const newWin = () => {
     win.on( 'closed', () => win = null )
     pollServer()
 }
+
+app.on( 'ready', ()=>{
+    /**
+     * Install and activate Vue Dev Tools extension if in developer mode
+     */
+    if ( 'development' === process.env.NODE_ENV ) {
+        const { default: installExtension, VUEJS_DEVTOOLS } = require( 'electron-devtools-installer' );
+        installExtension( VUEJS_DEVTOOLS )
+            .then( ( name ) => console.log( `Added Extension:  ${name}` ) )
+            .catch( ( err ) => console.log( 'An error occurred: ', err ) );
+    }
+})
 
 app.on( 'ready', newWin )
 app.on( 'window-all-closed', () => app.quit() )

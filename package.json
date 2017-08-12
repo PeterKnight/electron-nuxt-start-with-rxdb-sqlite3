@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "babel-preset-vue-app": "^1.2.0",
-    "electron": "^1.7.4",
+    "electron": "^1.7.5",
     "electron-devtools-installer": "^2.2.0",
     "electron-rebuild": "^1.4.0",
     "webpack": "^2.6.1"
@@ -21,7 +21,7 @@
     "babel-polyfill": "^6.23.0",
     "cross-env": "^5.0.1",
     "fs": "0.0.1-security",
-    "nuxt": "^1.0.0-alpha.4",
+    "nuxt": "^1.0.0-rc4",
     "pouchdb": "^6.1.0",
     "pouchdb-adapter-node-websql": "^6.1.0",
     "rxdb": "^5.0.0",
